@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nueva Aventura | Rancho de Haziel</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      background-color: #e8f5e9; /* Verde Slime Rad/Tangle muy claro */
+      font-family: 'Quicksand', sans-serif;
+      background-image: radial-gradient(#c8e6c9 10%, transparent 10%);
+      background-size: 20px 20px;
+    }
+    nav {
+      background-color: #4caf50 !important; /* Verde vibrante */
+      box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+    }
+    .brand-logo { font-family: 'Fredoka', sans-serif; font-weight: 700; }
+    .card {
+      border-radius: 25px;
+      border: 3px solid #81c784;
+      box-shadow: 0 10px 30px rgba(76, 175, 80, 0.15);
+    }
+    .card-title {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      color: #2e7d32 !important;
+      font-size: 28px !important;
+      margin-bottom: 30px !important;
+    }
+    .btn {
+      font-family: 'Fredoka', sans-serif;
+      border-radius: 25px;
+      background-color: #66bb6a !important;
+    }
+    .btn:hover { background-color: #81c784 !important; }
+    .btn.grey { background-color: #b0bec5 !important; }
+    /* Estilos para inputs Materialize */
+    .input-field input[type=text]:focus + label, .materialize-textarea:focus + label {
+      color: #4caf50 !important;
+    }
+    .input-field input[type=text]:focus, .materialize-textarea:focus {
+      border-bottom: 2px solid #4caf50 !important;
+      box-shadow: 0 1px 0 0 #4caf50 !important;
+    }
+    .dropdown-content li>a, .dropdown-content li>span { color: #4caf50; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/posts" class="brand-logo center">Rancho de Haziel</a>
+      <ul class="left">
+        <li><a href="/posts"><i class="material-icons">arrow_back</i></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 40px; margin-bottom: 40px;">
+    <div class="row">
+      <div class="col s12 m10 offset-m1 l8 offset-l2">
+        <div class="card">
+          <div class="card-content" style="padding: 40px;">
+            <div class="center-align">
+              <i class="material-icons" style="font-size: 48px; color: #4caf50;">edit_note</i>
+              <span class="card-title">Registrar Nueva Aventura</span>
+            </div>
+
+            <% if (error) { %>
+              <div class="card-panel red lighten-4 red-text text-darken-4" style="border-radius: 10px;">
+                <i class="material-icons tiny">error</i> <%= error %>
+              </div>
+            <% } %>
+
+            <form action="/posts/create" method="POST">
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">face</i>
+                  <select name="userId" required>
+                    <option value="" disabled selected>Elige a tu ranchero...</option>
+                    <% users.forEach(user => { %>
+                      <option value="<%= user._id %>"><%= user.name %> <%= user.lastName %></option>
+                    <% }); %>
+                  </select>
+                  <label>Autor de la aventura</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">title</i>
+                  <input type="text" id="title" name="title" required minlength="5" maxlength="30">
+                  <label for="title">Título del hallazgo (5-30 caracteres)</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">article</i>
+                  <textarea id="content" name="content" class="materialize-textarea" required minlength="10"></textarea>
+                  <label for="content">Diario del rancho (mín. 10 caracteres)</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">image</i>
+                  <input type="text" id="imageUrl" name="imageUrl">
+                  <label for="imageUrl">Foto de la zona (URL opcional)</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">tag</i>
+                  <input type="text" id="hashtags" name="hashtags">
+                  <label for="hashtags">Etiquetas (separadas por coma, ej: slime rosa, zanahoria)</label>
+                </div>
+              </div>
+
+              <div class="row" style="margin-top: 30px;">
+                <div class="col s12 center-align">
+                  <button type="submit" class="btn waves-effect waves-light btn-large">
+                    <i class="material-icons left">auto_awesome</i> Guardar en la Plortpedia
+                  </button>
+                  <a href="/posts" class="btn waves-effect waves-light grey btn-large" style="margin-left: 10px;">
+                    <i class="material-icons left">close</i> Cancelar
+                  </a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('select');
+      M.FormSelect.init(elems);
+    });
+  </script>
+</body>
+</html>

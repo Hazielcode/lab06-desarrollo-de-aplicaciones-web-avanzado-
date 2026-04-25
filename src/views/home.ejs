@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Slime Network | Haziel Alfonso</title>
+  <!-- Materialize CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+  <!-- Google Fonts para estilo Slime Rancher (Fredoka + Quicksand) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      background-color: #fce4ec; /* Rosa muy clarito (onda Slime Rosa) */
+      font-family: 'Quicksand', sans-serif;
+      background-image: radial-gradient(#f8bbd0 10%, transparent 10%);
+      background-size: 20px 20px;
+    }
+    h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      color: #e91e63; /* Rosa fuerte */
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    .flow-text {
+      color: #00838f; /* Cyan oscuro (onda Slime Charco/Agua) */
+      font-weight: 600;
+    }
+    .btn-large {
+      font-family: 'Fredoka', sans-serif;
+      border-radius: 30px; /* Botones muy redondeados */
+      background-color: #00bcd4 !important; /* Cyan brillante */
+      box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-large:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 188, 212, 0.6);
+      background-color: #26c6da !important;
+    }
+    .app-container {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 40px;
+      padding: 40px;
+      margin-top: 10vh;
+      box-shadow: 0 10px 30px rgba(233, 30, 99, 0.15);
+      border: 3px solid #f48fb1;
+    }
+  </style>
+</head>
+<body class="container">
+
+  <div class="app-container center-align">
+    <div style="background-color: #f06292; width: 120px; height: 120px; border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(240, 98, 146, 0.4);">
+      <i class="material-icons" style="font-size: 60px; color: white;">cruelty_free</i>
+    </div>
+    
+    <h2 style="margin-top: 20px;">El Rancho de Haziel Alfonso 🌟</h2>
+    <p class="flow-text">¡Comparte tus aventuras en la Lejana, Lejana Pradera!</p>
+
+    <div class="row" style="margin-top: 40px;">
+      <div class="col s12 m12">
+        <a href="/posts/" class="btn-large waves-effect waves-light" style="margin-bottom: 15px;">
+          <i class="material-icons left">pets</i> Ver Publicaciones
+        </a>
+        <br>
+        <a href="/users/create" class="btn-large waves-effect waves-light" style="background-color: #9c27b0 !important; box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);">
+          <i class="material-icons left">person_add</i> Inscribir Ranchero
+        </a>
+      </div> 
+    </div>
+  </div>
+
+  <!-- Materialize JS + icons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</body>
+</html>

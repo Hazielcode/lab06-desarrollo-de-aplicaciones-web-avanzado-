@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publicaciones | Rancho de Haziel</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      background-color: #e0f7fa; /* Cyan super clarito */
+      font-family: 'Quicksand', sans-serif;
+      background-image: radial-gradient(#b2ebf2 10%, transparent 10%);
+      background-size: 20px 20px;
+    }
+    nav {
+      background-color: #f06292 !important; /* Rosa Slime */
+      box-shadow: 0 4px 15px rgba(240, 98, 146, 0.4);
+    }
+    .brand-logo {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+    }
+    h4 {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      color: #00838f;
+    }
+    .card {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid #b2ebf2;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0, 188, 212, 0.2);
+    }
+    .card-title {
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      color: #e91e63 !important;
+    }
+    .btn {
+      font-family: 'Fredoka', sans-serif;
+      border-radius: 25px;
+      background-color: #00bcd4 !important;
+    }
+    .btn:hover {
+      background-color: #26c6da !important;
+    }
+    .chip {
+      background-color: #f8bbd0;
+      color: #880e4f;
+      font-weight: 600;
+      border-radius: 15px;
+    }
+    .card-action {
+      background-color: #fafafa !important;
+      border-top: 2px dashed #e0e0e0 !important;
+    }
+    .material-icons.teal-text { color: #00acc1 !important; }
+    .material-icons.red-text { color: #ec407a !important; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo center"><i class="material-icons">pets</i> Rancho de Haziel</a>
+      <ul class="right">
+        <li><a href="/users/create" title="Nuevo Ranchero"><i class="material-icons">person_add</i></a></li>
+        <li><a href="/posts/create" class="btn-floating btn-large waves-effect waves-light cyan" title="Nueva Aventura"><i class="material-icons">add</i></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h4 class="center-align" style="margin-top: 30px;">Tablón del Rancho</h4>
+
+    <div class="row" style="margin-top: 20px;">
+      <div class="col s12 center-align">
+        <a href="/posts/create" class="btn waves-effect waves-light btn-large">
+          <i class="material-icons left">add_circle</i> Nueva Aventura
+        </a>
+      </div>
+    </div>
+
+    <div class="row">
+      <% if (posts && posts.length > 0) { %>
+        <% posts.forEach(post => { %>
+          <div class="col s12 m6 l4">
+            <div class="card">
+              <% if (post.imageUrl) { %>
+                <div class="card-image">
+                  <img src="<%= post.imageUrl %>" alt="Imagen del post" style="height: 200px; object-fit: cover;">
+                </div>
+              <% } %>
+              <div class="card-content">
+                <span class="card-title"><%= post.title %></span>
+                <p style="font-size: 1.1em; color: #424242;"><%= post.content %></p>
+                <% if (post.hashtags && post.hashtags.length > 0) { %>
+                  <div style="margin-top: 15px;">
+                    <% post.hashtags.forEach(tag => { %>
+                      <span class="chip">#<%= tag %></span>
+                    <% }); %>
+                  </div>
+                <% } %>
+                <p class="grey-text" style="font-size: 12px; margin-top: 15px;">
+                  <i class="material-icons tiny" style="vertical-align: middle;">access_time</i>
+                  <%= post.createdAt ? new Date(post.createdAt).toLocaleDateString('es-PE') : 'Sin fecha' %>
+                  <% if (post.updatedAt) { %>
+                    <br><i class="material-icons tiny" style="vertical-align: middle;">update</i> Editado: <%= new Date(post.updatedAt).toLocaleDateString('es-PE') %>
+                  <% } %>
+                </p>
+              </div>
+              <div class="card-action">
+                <div class="right">
+                  <a href="/posts/edit/<%= post._id %>" class="btn-flat" style="padding: 0 10px;"><i class="material-icons teal-text">edit</i></a>
+                  <a href="/posts/delete/<%= post._id %>" class="btn-flat" style="padding: 0 10px;"><i class="material-icons red-text">delete</i></a>
+                </div>
+                <span style="color: #00838f;"><i class="material-icons tiny">person</i> <strong><%= post.user ? post.user.name + ' ' + post.user.lastName : 'Ranchero Anónimo' %></strong></span>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="col s12 center-align" style="margin-top: 60px;">
+          <i class="material-icons" style="font-size: 80px; color: #b2ebf2;">cruelty_free</i>
+          <p class="flow-text" style="color: #00838f;">¡Aún no hay aventuras en el rancho!</p>
+          <a href="/posts/create" class="btn waves-effect waves-light">Comenzar</a>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
